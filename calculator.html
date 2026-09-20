@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Calculator</title>
+<link rel="stylesheet" href="./calculator.css">
+</head>
+<body>
+<header>
+  <h1>Engineering Calculator</h1>
+  <nav id="tabs"></nav>
+  <button data-act="theme" id="theme">Light mode</button>
+</header>
+<main>
+
+<!-- Calculator (basic + scientific + engineering keys, memory, variables, history) -->
+<section id="calculator" class="pane" data-title="Calculator">
+  <div class="calc">
+    <div class="display">
+      <div class="row"><span id="memFlag"></span>
+        <span class="seg" id="angle"><button class="on" data-a="DEG">DEG</button><button data-a="RAD">RAD</button><button data-a="GRAD">GRAD</button></span>
+      </div>
+      <div id="prev"></div><div id="expr"></div><div id="result">0</div>
+    </div>
+    <div class="tools">
+      <button data-act="mc">MC</button><button data-act="mr">MR</button><button data-act="mp">M+</button><button data-act="mm">M−</button><button data-act="ms">MS</button>
+      <button data-act="sci" id="sciBtn">Sci</button><button data-act="inv">2nd</button><button data-act="frac">Frac</button><button data-act="fmt">Norm</button><button data-act="prime">Factors</button>
+      <select id="varSel"><option>A</option><option>B</option><option>C</option><option>X</option><option>Y</option></select>
+      <button data-act="sto">STO</button><button data-act="rcl">RCL</button><span id="varVals"></span>
+    </div>
+    <div id="sci" class="grid g6" hidden></div>
+    <div id="basic" class="grid g5"></div>
+  </div>
+  <aside class="hist"><h2>History</h2><button data-act="clearhist">Clear history</button><ul id="histList"></ul></aside>
+</section>
+
+<!-- Statistics -->
+<section id="stats" class="pane card" data-title="Statistics">
+  <label>Enter values separated by commas, spaces or new lines</label>
+  <textarea id="stData" rows="3">10, 20, 30, 40, 50</textarea>
+  <button data-act="stats">Calculate</button>
+  <table id="stOut"></table>
+</section>
+
+<!-- Unit converter -->
+<section id="converter" class="pane card" data-title="Converter">
+  <select id="cat"></select>
+  <input id="cIn" type="number" value="1" step="any">
+  <select id="cFrom"></select> <span>→</span> <select id="cTo"></select>
+  <div class="big" id="cOut"></div>
+</section>
+
+<!-- Electrical -->
+<section id="electrical" class="pane card" data-title="Electrical">
+  <h2>Ohm's law and power</h2>
+  <p>Fill any two fields (SI prefixes like 4.7k work), then calculate the other two.</p>
+  <div class="form">
+    <label>Voltage V <input id="eV"></label><label>Current I <input id="eI"></label>
+    <label>Resistance R <input id="eR"></label><label>Power P <input id="eP"></label>
+  </div>
+  <button data-act="ohm">Calculate</button> <span id="ohmMsg"></span>
+  <h2>Series and parallel resistors</h2>
+  <label>Resistances separated by commas <input id="rList" value="100, 220, 330"></label>
+  <button data-act="rnet">Calculate</button>
+  <div class="big" id="rOut"></div>
+</section>
+
+<!-- Equation solver -->
+<section id="solver" class="pane card" data-title="Equation Solver">
+  <p>Linear or quadratic in x, for example <code>2x+5=15</code> or <code>x^2-5x+6=0</code>.</p>
+  <input id="eqIn" value="x^2-5x+6=0"> <button data-act="solve">Solve</button>
+  <div class="big" id="eqOut"></div>
+</section>
+
+<!-- Number systems -->
+<section id="numbers" class="pane card" data-title="Number Systems">
+  <div class="form">
+    <label>Value <input id="nsIn" value="255"></label>
+    <label>Base <select id="nsBase"><option value="10">DEC</option><option value="2">BIN</option><option value="8">OCT</option><option value="16">HEX</option></select></label>
+  </div>
+  <pre id="nsOut"></pre>
+  <div class="form">
+    <label>Second value (same base) <input id="nsIn2" value="15"></label>
+    <label>Operation <select id="bitOp"><option>AND</option><option>OR</option><option>XOR</option><option>NOT</option><option>SHL</option><option>SHR</option></select></label>
+  </div>
+  <button data-act="bit">Apply</button>
+  <pre id="bitOut"></pre>
+</section>
+
+</main>
+<script src="./calculator.js"></script>
+</body>
+</html>
